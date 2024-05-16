@@ -4,10 +4,19 @@ import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+ 
+
+
+//images
+import image from "../assets/images/image-product-1.jpg";
+import image1 from "../assets/images/image-product-1-thumbnail.jpg";
+import image2 from "../assets/images/image-product-2-thumbnail.jpg";
+import image3 from "../assets/images/image-product-3-thumbnail.jpg";
+import image4 from "../assets/images/image-product-4-thumbnail.jpg";
 
 function Navbar() {
-  // const { amount } = useSelector((store) => store.products);
-  const { products, amount } = useSelector((state) => state.products);
+  const { amount } = useSelector((store) => store.products);
+  const { products} = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -110,6 +119,42 @@ function Navbar() {
                 className="h-10 w-10 rounded-full"
               />
             </NavLink>
+          </div>
+
+          <div
+            className={`absolute  top-20 right-cart flex items-end flex-col bg-white shadow-lg w-96 h-72 rounded-lg z-5 ${  amount === false && "hidden"
+            }`}
+          >
+            <h5 className="text-black font-bold py-4 px-8 text-left">Cart</h5>
+            <hr className="relative w-full p-0 " />
+            {amount === null ? (
+              <div className="text-center mt-20 font-bold text-black">
+                <p className="ml-20 text-2xl">Your cart is empty</p>
+              </div>
+            ) : (
+              <div className="flex items-center flex-col gap-6 py-8 px-6">
+                <div className="flex items-center justify-between gap-2">
+                  <img className="w-1/5 rounded-lg" src={image} alt="Shoes" />
+                  <div>
+                    <p className="text-black text-base mb-2">
+                      Fall Limited Edition Sneakers
+                    </p>
+                    <p>
+                      $125.00 x {products};
+                      <span className="text-black font-bold">
+                        ${125 * amount}.00
+                      </span>
+                    </p>
+                  </div>
+                  <button onClick={() => dispatch(removeItems())}>
+                    <img src="" alt="" />
+                  </button>
+                </div>
+                <button className="bg-orange-400 btn btn-primary text-white font-bold border-none rounded-md w-full p-4 hover:shadow-lg">
+                  Checkout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
