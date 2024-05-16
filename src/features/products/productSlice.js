@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   products: [],
   amount: 0,
-  total: 0,
   price: 0,
 };
 
@@ -25,8 +24,21 @@ export const productsSlice = createSlice({
       state.products.forEach((product) => {
         totalPrice += product.price * product.amount;
       });
-
       state.price = totalPrice;
+    },
+    addItems(state) {
+      localStorage.setItem("items", JSON.stringify(state.items));
+      const itemsStorage = JSON.parse(localStorage.getItem("items"));
+      state.cartItems = itemsStorage;
+      state.items = 0;
+    },
+    getItems(state) {
+      const itemsStorage = JSON.parse(localStorage.getItem("items"));
+      state.cartItems = itemsStorage;
+    },
+    removeItems(state) {
+      const deleteItemsStorage = localStorage.removeItem("items");
+      state.cartItems = deleteItemsStorage;
     },
     addProduct: (state, action) => {
       state.products.push(action.payload);

@@ -7,16 +7,23 @@ import image3 from "../assets/images/image-product-3-thumbnail.jpg";
 import image4 from "../assets/images/image-product-4-thumbnail.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addProduct,
   decreaseAmount,
   increaseAmount,
 } from "../features/products/productSlice";
 
 function Hero() {
   const dispatch = useDispatch();
-  const { amount } = useSelector((state) => state.products);
+  const { products, amount } = useSelector((state) => state.products);
+
+  // Mahsulotni savatga qo'shish funksiyasi
+  const handleAddToCart = () => {
+    dispatch(addProduct(products));
+  };
 
   return (
     <div className="align-content flex gap-16 pl-12 pr-12 pt-16 pb-20">
+      {/* Mahsulot rasmlari */}
       <div>
         <img
           src={image}
@@ -56,6 +63,7 @@ function Hero() {
           />
         </div>
       </div>
+      {/* Mahsulot haqida ma'lumotlar */}
       <div className="w-1/3 pt-10">
         <p className="text-orange-500 mb-6 uppercase leading-tight text-xs tracking-widest font-semibold">
           Sneaker Company
@@ -82,6 +90,7 @@ function Hero() {
             <button
               className="text-orange-500 text-3xl"
               onClick={() => dispatch(decreaseAmount())}
+              disabled={amount === 0}
             >
               -
             </button>
@@ -93,7 +102,10 @@ function Hero() {
               +
             </button>
           </div>
-          <button className="btn btn-secondary bg-orange-500 w-48">
+          <button
+            className="btn btn-secondary bg-orange-500 w-48 add"
+            onClick={handleAddToCart}
+          >
             <BsCart3 className="" />
             Add to cart
           </button>

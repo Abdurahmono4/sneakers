@@ -2,8 +2,18 @@ import { BsCart3 } from "react-icons/bs";
 import logo from "../assets/images/logo.svg";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 function Navbar() {
+  // const { amount } = useSelector((store) => store.products);
+  const { products, amount } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getProduct());
+  // }, [dispatch, products]);
+
   return (
     <>
       <div className="  navbar bg-base-100 flex justify-between align-content items-center border-b-2">
@@ -85,7 +95,12 @@ function Navbar() {
             <NavLink className="btn btn-circle btn-md ml-4">
               <div className="indicator">
                 <BsCart3 className="h-6 w-6" />
-                <span className="badge badge-sm badge-primary indicator-item"></span>
+                <span
+                  className="badge badge-sm badge-primary indicator-item"
+                  defaultChecked={amount === 0 ? false : true}
+                >
+                  {amount === 0 ? "Empty" : amount}
+                </span>
               </div>
             </NavLink>
             <NavLink>
