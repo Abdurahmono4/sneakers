@@ -20,7 +20,6 @@ export const productsSlice = createSlice({
     },
     calculateTotal: (state) => {
       let totalPrice = 0;
-
       state.products.forEach((product) => {
         totalPrice += product.price * product.amount;
       });
@@ -29,14 +28,14 @@ export const productsSlice = createSlice({
     addItems(state) {
       localStorage.setItem("items", JSON.stringify(state.items));
       const itemsStorage = JSON.parse(localStorage.getItem("items"));
-      state.cartItems = itemsStorage;
+      state.cartItems = productsStorage;
       state.items = 0;
     },
-    getItems(state) {
-      const itemsStorage = JSON.parse(localStorage.getItem("items"));
-      state.cartItems = itemsStorage;
+    getProduct(state) {
+      const itemsStorage = JSON.parse(localStorage.getProduct("products"));
+      state.cartItems = productsStorage;
     },
-    removeItems(state) {
+    removeProduct(state) {
       const deleteItemsStorage = localStorage.removeItem("items");
       state.cartItems = deleteItemsStorage;
     },

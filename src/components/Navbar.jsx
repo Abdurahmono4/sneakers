@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
- 
+
 
 
 //images
@@ -13,10 +13,11 @@ import image1 from "../assets/images/image-product-1-thumbnail.jpg";
 import image2 from "../assets/images/image-product-2-thumbnail.jpg";
 import image3 from "../assets/images/image-product-3-thumbnail.jpg";
 import image4 from "../assets/images/image-product-4-thumbnail.jpg";
+import image5 from "../assets/images/icon-delete.svg";
 
 function Navbar() {
   const { amount } = useSelector((store) => store.products);
-  const { products} = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -122,7 +123,8 @@ function Navbar() {
           </div>
 
           <div
-            className={`absolute  top-20 right-cart flex items-end flex-col bg-white shadow-lg w-96 h-72 rounded-lg z-5 ${  amount === false && "hidden"
+            className={`absolute  top-20 right-cart flex items-end flex-col bg-white shadow-lg w-96 h-72 rounded-lg z-5 ${
+              amount === 0 && "hidden"
             }`}
           >
             <h5 className="text-black font-bold py-4 px-8 text-left">Cart</h5>
@@ -146,8 +148,8 @@ function Navbar() {
                       </span>
                     </p>
                   </div>
-                  <button onClick={() => dispatch(removeItems())}>
-                    <img src="" alt="" />
+                  <button onClick={() => dispatch(removeProducts())}>
+                    <img src={image5} alt="" />
                   </button>
                 </div>
                 <button className="bg-orange-400 btn btn-primary text-white font-bold border-none rounded-md w-full p-4 hover:shadow-lg">

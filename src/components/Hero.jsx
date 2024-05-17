@@ -16,14 +16,11 @@ function Hero() {
   const dispatch = useDispatch();
   const { products, amount } = useSelector((state) => state.products);
 
-  // Mahsulotni savatga qo'shish funksiyasi
   const handleAddToCart = () => {
     dispatch(addProduct(products));
   };
-
   return (
     <div className="align-content flex gap-16 pl-12 pr-12 pt-16 pb-20">
-      {/* Mahsulot rasmlari */}
       <div>
         <img
           src={image}
@@ -63,7 +60,6 @@ function Hero() {
           />
         </div>
       </div>
-      {/* Mahsulot haqida ma'lumotlar */}
       <div className="w-1/3 pt-10">
         <p className="text-orange-500 mb-6 uppercase leading-tight text-xs tracking-widest font-semibold">
           Sneaker Company
@@ -77,7 +73,7 @@ function Hero() {
           the weather can offer.
         </p>
         <h2 className="font-bold text-lg flex gap-5 mt-5 items-center">
-          $125.00{" "}
+          $125.00
           <span className="rounded bg-orange-200 text-orange-500 text-sm">
             50%
           </span>
